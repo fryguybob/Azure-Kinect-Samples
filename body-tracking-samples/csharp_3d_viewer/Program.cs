@@ -63,12 +63,12 @@ namespace Csharp_3d_viewer
                                     if (frame != null)
                                     {
                                         // Save to recording file.
-                                        file.Write(frame.DeviceTimestamp.Ticks);
-                                        file.Write(frame.NumberOfBodies);
+                                        file.Write(frame.DeviceTimestamp.Ticks); // long = Int64 
+                                        file.Write(frame.NumberOfBodies);        // uint = Int32
                                         for (uint i = 0; i < frame.NumberOfBodies; i++)
                                         {
                                             var person = frame.GetBodyId(i);
-                                            file.Write(person);
+                                            file.Write(person); // uint = Int32
                                             var s = frame.GetBodySkeleton(i);
                                             for (uint j = 0; j < Skeleton.JointCount; j++)
                                             {
@@ -76,8 +76,8 @@ namespace Csharp_3d_viewer
                                                 var c = joint.ConfidenceLevel;
                                                 var p = joint.Position;
                                                 var r = joint.Quaternion;
-                                                file.Write((byte)c);
-                                                file.Write(p.X); file.Write(p.Y); file.Write(p.Z);
+                                                file.Write((byte)c); // byte = 8-bit unsigned
+                                                file.Write(p.X); file.Write(p.Y); file.Write(p.Z); // float = 32-bit floating point.
                                                 file.Write(r.X); file.Write(r.Y); file.Write(r.Z); file.Write(r.W);
                                             }
                                         }
